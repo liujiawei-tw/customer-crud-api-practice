@@ -40,7 +40,7 @@ public class CustomerController {
         return CustomerResponse.from(customer);
     }
 
-    @PostMapping("api/v1/customers/{id}")
+    @PutMapping("api/v1/customers/{id}")
     public CustomerResponse update(
             @PathVariable Long id,
             @Valid @RequestBody UpdateCustomerRequest request
