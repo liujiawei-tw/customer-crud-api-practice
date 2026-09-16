@@ -12,5 +12,17 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
+  app:
+    image: customer-crud-api-practice:1.0.0
+    container_name: customer-crud-practice-app
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/customer_crud_practice
+      SPRING_DATASOURCE_USERNAME: app_user
+      SPRING_DATASOURCE_PASSWORD: app_password
+    ports:
+      - "8080:8080"
+
 volumes:
   mysql_data:

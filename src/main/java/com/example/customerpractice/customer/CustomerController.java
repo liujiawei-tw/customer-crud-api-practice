@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/customers")
 public class CustomerController {
     private final CustomerService customerService;
 
@@ -14,11 +15,10 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @PostMapping("api/v1/customers")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CustomerResponse create(@Valid @RequestBody CreateCustomerRequest request) {
-
-        Customer customer= customerService.create(
+        Customer customer = customerService.create(
                 request.name(),
                 request.email(),
                 request.phone());
@@ -26,7 +26,7 @@ public class CustomerController {
         return CustomerResponse.from(customer);
     }
 
-    @GetMapping("api/v1/customers")
+    @GetMapping
     public List<CustomerResponse> findAll() {
         return customerService.findAll()
                 .stream()
@@ -34,29 +34,29 @@ public class CustomerController {
                 .toList();
     }
 
-    @GetMapping("api/v1/customers/{id}")
+    @GetMapping("/{id}")
     public CustomerResponse findById(@PathVariable Long id) {
         Customer customer = customerService.findById(id);
         return CustomerResponse.from(customer);
     }
 
-    @PutMapping("api/v1/customers/{id}")
+    @PutMapping("/{id}")
     public CustomerResponse update(
             @PathVariable Long id,
             @Valid @RequestBody UpdateCustomerRequest request
-    ){
-           Customer customer= customerService.update(
-                   id,
-                   request.name(),
-                   request.email(),
-                   request.phone()
-           );
-           return CustomerResponse.from(customer);
+    ) {
+        Customer customer = customerService.update(
+               id,
+               request.name(),
+               request.email(),
+               request.phone()
+        );
+        return CustomerResponse.from(customer);
     }
 
-    @DeleteMapping("api/v1/customers/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         customerService.delete(id);
     }
 }
