@@ -181,6 +181,10 @@ Common status codes:
 | 404 | Customer not found |
 | 409 | Duplicate customer email |
 
+## CI
+
+This project uses GitHub Actions to run tests automatically on push and pull request.
+
 ## Test
 
 Run all tests:
@@ -195,3 +199,4 @@ Run all tests:
 - JPA validates that the Entity mapping matches the database schema.
 - The API does not expose Entity objects directly. It uses request and response DTOs.
 - MySQL data is stored in the Docker volume `mysql_data`.
+
